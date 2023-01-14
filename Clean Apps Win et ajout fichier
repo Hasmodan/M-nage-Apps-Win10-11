@@ -1,0 +1,36 @@
+#Un autre petit script en powershell sans prétention ou autre qui m'a beaucoup servi lors de la préparation de poste, 
+#la suppression de certaines applications préinstallé sur Windows mais aussi l'ajout d'un lien URL pointant vers le portail des congés pour l'entreprise
+#aussi un bloc note avec les différentes informations à savoir pour le salarié.
+#permettant d'automatiser les tâches pour la finalisation du poste. 
+
+Write-Host '▂▃▄▅▆▇█▓▒░𝔇𝔬𝔠𝔱𝔢𝔲𝔯 𝓒𝔥𝔞𝔱𝔢𝔩𝔦𝔫░▒▓█▇▆▅▄▃▂' -foregroundcolor Red
+Write-Host ' Démarrage dans quelques instants....  '-foregroundcolor Green
+Start-Sleep -s 2
+
+Get-AppxPackage Disney.37853FC22B2CE | Remove-AppxPackage
+Get-AppxPackage BytedancePte.Ltd.TikTok | Remove-AppxPackage
+Get-AppxPackage FACEBOOK.FACEBOOK | Remove-AppxPackage
+Get-AppxPackage Facebook.InstagramBeta | Remove-AppxPackage
+Get-AppxPackage AmazonVideo.PrimeVideo | Remove-AppxPackage
+Get-AppxPackage SpotifyAB.SpotifyMusic  | Remove-AppxPackage
+Get-AppxPackage Disney.37853FC22B2CE  | Remove-AppxPackage
+Get-AppxPackage AdobeSystemsIncorporated.AdobeCreativeCloudExpress  | Remove-AppxPackage
+Get-AppxPackage Microsoft.MicrosoftSolitaireCollection  | Remove-AppxPackage
+Get-AppxPackage Clipchamp.Clipchamp  | Remove-AppxPackage
+Get-AppxPackage Microsoft.BingNews  | Remove-AppxPackage
+Get-AppxPackage MicrosoftTeams  | Remove-AppxPackage 
+Get-AppxPackage FACEBOOK.317180B0BB486| Remove-AppxPackage 
+Copy-Item -Path "D:\txt\A-SAVOIR.txt" -Destination "$env:USERPROFILE\Desktop\A-SAVOIR.txt" -Recurse -Force
+$TargetFile = "URL DU PORTAIL CONGE.lnk"
+$shortcutFile = "$env:USERPROFILE\Desktop\CONGE.lnk"
+$WScriptShell = New-Object -ComObject WScript.Shell
+Copy-Item "D:\txt\conge.ico" -Destination "$env:USERPROFILE\Pictures"
+$file =Get-Item "$env:USERPROFILE\Pictures\conge.ico" -Force
+$FILE.Attributes='Hidden'
+$shortcut = $WScriptShell.CreateShortcut($ShortcutFile)
+$shortcut.TargetPath = $TargetFile
+$shortcut.IconLocation = "$env:USERPROFILE\Pictures\pegase.ico"
+$shortcut.Save()
+1..5 | Sort-Object -Descending | %{Start-Sleep -Seconds 1;cls;Write-Host "Fermeture dans .... $_" -ForegroundColor Green}
+stop-process -name explorer –force
+
